@@ -9,7 +9,7 @@ export const createProduct = (req: Request, res: Response, next: NextFunction) =
   return Product.create({
     description, image, title, category, price,
   })
-    .then((products) => res.status(201).send({ data: products }))
+    .then((products) => res.status(201).send( products ))
     .catch((error) => next(error));
 };
 
