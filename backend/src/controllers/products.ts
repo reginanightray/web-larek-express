@@ -9,10 +9,10 @@ export const createProduct = (req: Request, res: Response, next: NextFunction) =
   return Product.create({
     description, image, title, category, price,
   })
-    .then((products) => res.send({ data: products }))
+    .then((products) => res.status(201).send({ data: products }))
     .catch((error) => next(error));
 };
 
 export const getProducts = (_req: Request, res: Response, next: NextFunction) => Product.find({})
-  .then((products) => res.send({ items: products, total: products.length }))
+  .then((products) => res.status(200).send({ items: products, total: products.length }))
   .catch((error) => next(error));

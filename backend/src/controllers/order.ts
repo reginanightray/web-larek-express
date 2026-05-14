@@ -16,7 +16,7 @@ const createOrder = async (req: Request, res: Response, next: NextFunction) => {
   // создаем id заказа
   const orderId = faker.string.uuid();
 
-  return res.send({ id: orderId, total });
+  return res.status(201).send({ id: orderId, total });
 };
 
 export default createOrder;
