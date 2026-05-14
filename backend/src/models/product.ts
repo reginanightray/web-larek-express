@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 interface IProduct {
   title: string;
   image: {
-    fileName: string,
+    fileName: string;
     originalName: string;
   };
   category: string;
@@ -17,27 +17,27 @@ const productSchema = new mongoose.Schema<IProduct>({
     required: true,
     unique: true,
     minlength: 2,
-    maxlength: 30 
+    maxlength: 30,
   },
   image: {
     type: {
-      fileName: String, 
-      originalName: String
+      fileName: String,
+      originalName: String,
     },
     required: true,
-    _id: false
+    _id: false,
   },
   category: {
-    type: String, 
-    required: true
+    type: String,
+    required: true,
   },
   description: {
-    type: String
+    type: String,
   },
   price: {
-    type: Number || null, 
-    default: null
-  } 
-})
+    type: Number,
+    default: null,
+  },
+});
 
-export default mongoose.model<IProduct>('product', productSchema); 
+export default mongoose.model<IProduct>('product', productSchema);

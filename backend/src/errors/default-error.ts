@@ -7,4 +7,4 @@ class DefaultError extends Error {
   }
 }
 
-export default DefaultError
+export default DefaultError;
