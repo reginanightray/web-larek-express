@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -9,7 +10,9 @@ import errorHandler from './middleswares/handleError';
 import NotFoundError from './errors/not-found-error';
 import { requestLogger, errorLogger } from './middleswares/logger';
 
-const { PORT = 3000, BASE_PATH } = process.env;
+dotenv.config();
+
+const { PORT = 3000, BASE_PATH = `http://localhost:${PORT}` } = process.env;
 
 const app = express();
 const mongoURI = 'mongodb://127.0.0.1:27017/weblarek';
@@ -27,11 +30,11 @@ mongoose
 app.use(requestLogger);
 app.use('/product', productsRouter);
 app.use('/order', orderRouter);
+app.use(celebrateErrors());
 app.use(errorLogger);
 app.use((_req, _res, next) => {
   next(new NotFoundError('Маршрут не найден'));
 });
-app.use(celebrateErrors());
 app.use(errorHandler);
 app.listen(PORT, () => {
   console.log('Ссылка на сервер');

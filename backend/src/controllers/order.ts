@@ -1,20 +1,35 @@
 import { NextFunction, Request, Response } from 'express';
-import { faker } from '@faker-js/faker';
-import { orderValidator } from '../utils/validators/orderValidation';
+import mongoose from 'mongoose';
 import BadRequestError from '../errors/bad-request-error';
+import Product from '../models/product';
 
 const createOrder = async (req: Request, res: Response, next: NextFunction) => {
   const { total, items } = req.body;
 
-  const validation = await orderValidator({ total, items });
+  try {
+    // проверка, что в массиве все товары c существующим _id и price не равен null
 
-  if (!validation.isValid) {
-    return next(new BadRequestError(validation.errors.join(', ')));
+    const existingProducts = await Product.find({ _id: { $in: items } });
+
+    if (existingProducts.length !== items.length) {
+      throw new BadRequestError('Товар не существует');
+    }
+
+    if (existingProducts.some((p) => p.price === null)) {
+      throw new BadRequestError('В корзине бесценный товар');
+    }
+
+    const totalInBasket = existingProducts.reduce((sum, product) => sum + product.price, 0);
+
+    if (totalInBasket !== total) {
+      throw new BadRequestError('Не совпадает стоимость товаров в корзине');
+    }
+    const orderId = new mongoose.Types.ObjectId().toString();
+
+    res.status(201).send({ id: orderId, total });
+  } catch (error) {
+    next(error);
   }
-  // создаем id заказа
-  const orderId = faker.string.uuid();
-
-  return res.status(201).send({ id: orderId, total });
 };
 
 export default createOrder;

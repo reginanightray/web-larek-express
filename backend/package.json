@@ -1,7 +1,7 @@
 {
   "name": "weblarek_backend",
   "version": "1.0.0",
-  "description": "< Добавьте описание проекта в свободной форме >",
+  "description": "Бекэнд интернет-магазина вебларек",
   "main": "dist/app.js",
   "scripts": {
     "lint": "npx eslint src/**/*.ts",
@@ -12,30 +12,25 @@
     "start": "ts-node src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "< Укажите здесь автора работы >",
+  "author": "Регина Найтрей",
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^4.17.21",
-    "@types/joi": "^17.2.2",
     "@types/node": "^20.12.7",
-    "@types/validator": "^13.11.9",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-prettier": "^5.5.5",
     "prettier": "^3.8.3",
     "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@faker-js/faker": "^10.4.0",
     "celebrate": "^15.0.3",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^4.19.2",
     "express-winston": "^4.2.0",
     "mongoose": "^8.3.2",

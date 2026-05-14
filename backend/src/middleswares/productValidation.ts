@@ -8,7 +8,7 @@ export const validateCreateProduct = celebrate({
     image: Joi.object({
       fileName: Joi.string().required(),
       originalName: Joi.string().required(),
-    }),
+    }).required(),
     category: Joi.string().required(),
     price: Joi.number().allow(null).default(null),
   }),
