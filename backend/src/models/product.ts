@@ -7,8 +7,8 @@ interface IProduct {
     originalName: string;
   };
   category: string;
-  description: string;
-  price: number;
+  description?: string;
+  price: number | null;
 }
 
 const productSchema = new mongoose.Schema<IProduct>({
