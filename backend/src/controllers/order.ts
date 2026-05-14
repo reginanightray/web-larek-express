@@ -4,9 +4,7 @@ import { orderValidator } from '../utils/validators/orderValidation';
 import BadRequestError from '../errors/bad-request-error';
 
 const createOrder = async (req: Request, res: Response, next: NextFunction) => {
-  const {
-    total, items,
-  } = req.body;
+  const { total, items } = req.body;
 
   const validation = await orderValidator({ total, items });
 

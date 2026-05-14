@@ -7,9 +7,13 @@ export const createProduct = (req: Request, res: Response, next: NextFunction) =
   } = req.body;
 
   return Product.create({
-    description, image, title, category, price,
+    description,
+    image,
+    title,
+    category,
+    price,
   })
-    .then((products) => res.status(201).send( products ))
+    .then((products) => res.status(201).send(products))
     .catch((error) => next(error));
 };
 
