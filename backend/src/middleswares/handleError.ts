@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { CelebrateError } from 'celebrate';
+import mongoose from 'mongoose';
 
 const errorHandler = (err: any, _req: Request, res: Response, _next: NextFunction) => {
   if (err instanceof CelebrateError) {
@@ -8,7 +9,7 @@ const errorHandler = (err: any, _req: Request, res: Response, _next: NextFunctio
     });
   }
 
-  if (err instanceof Error && err.message.includes('E11000')) {
+  if (err instanceof mongoose.mongo.MongoServerError && err.code === 11000) {
     return res.status(409).json({
       message: 'Ошибка при создании товара с уже существующим полем title',
     });

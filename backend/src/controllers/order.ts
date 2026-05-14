@@ -19,14 +19,14 @@ const createOrder = async (req: Request, res: Response, next: NextFunction) => {
       throw new BadRequestError('В корзине бесценный товар');
     }
 
-    const totalInBasket = existingProducts.reduce((sum, product) => sum + product.price, 0);
+    const totalInBasket = existingProducts.reduce((sum, product) => sum + (product.price || 0), 0);
 
     if (totalInBasket !== total) {
       throw new BadRequestError('Не совпадает стоимость товаров в корзине');
     }
     const orderId = new mongoose.Types.ObjectId().toString();
 
-    res.status(201).send({ id: orderId, total });
+    res.status(201).send({ id: orderId, total: totalInBasket });
   } catch (error) {
     next(error);
   }
