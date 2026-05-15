@@ -15,7 +15,7 @@ dotenv.config();
 const { PORT = 3000, BASE_PATH = `http://localhost:${PORT}` } = process.env;
 
 const app = express();
-const mongoURI = 'mongodb://127.0.0.1:27017/weblarek';
+const mongoURI = process.env.DB_ADDRESS || 'mongodb://127.0.0.1:27017/weblarek';
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
