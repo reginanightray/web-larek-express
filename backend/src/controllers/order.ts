@@ -26,7 +26,7 @@ const createOrder = async (req: Request, res: Response, next: NextFunction) => {
     }
     const orderId = new mongoose.Types.ObjectId().toString();
 
-    res.status(201).send({ id: orderId, total: totalInBasket });
+    res.status(200).send({ id: orderId, total: totalInBasket });
   } catch (error) {
     next(error);
   }
